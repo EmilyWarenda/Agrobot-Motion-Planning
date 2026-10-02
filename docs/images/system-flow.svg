@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 780" width="900" height="780" role="img" aria-labelledby="t d" font-family="Helvetica, Arial, sans-serif">
+  <title id="t">Agrobot system flow</title>
+  <desc id="d">Vision detections flow through the tomato picker, robot commander and MoveIt, then the trajectory fanout to the joint bridges, CANopen, and the motor drives.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#475569"/>
+    </marker>
+    <style>
+      .box{fill:#e8f1fd;stroke:#2563eb;stroke-width:2}
+      .ext{fill:#f1f5f9;stroke:#64748b;stroke-width:2;stroke-dasharray:6 4}
+      .hw{fill:#fff4e0;stroke:#d97706;stroke-width:2}
+      .h{font-size:17px;font-weight:700;fill:#0f172a;text-anchor:middle}
+      .s{font-size:13px;fill:#334155;text-anchor:middle}
+      .m{font-size:12px;fill:#475569;font-family:Menlo,Consolas,monospace}
+      .l{stroke:#475569;stroke-width:2;fill:none}
+    </style>
+  </defs>
+  <rect width="900" height="780" fill="#ffffff"/>
+  <text x="450" y="32" class="h" style="font-size:22px">Agrobot — Motion Planning Data Flow</text>
+
+  <!-- 1 vision -->
+  <rect x="250" y="55" width="400" height="70" rx="10" class="ext"/>
+  <text x="450" y="85" class="h">AI Vision (separate repo)</text>
+  <text x="450" y="107" class="s">RealSense camera → tomato detection + depth</text>
+  <line x1="450" y1="125" x2="450" y2="160" class="l" marker-end="url(#a)"/>
+  <text x="462" y="148" class="m">/agrobot/tomato_spatial · /agrobot/safe_to_pick</text>
+
+  <!-- 2 picker -->
+  <rect x="250" y="160" width="400" height="80" rx="10" class="box"/>
+  <text x="450" y="190" class="h">tomato_picker.py / sequencer.py</text>
+  <text x="450" y="211" class="s">confidence filter · TF2 camera→base · reach check</text>
+  <text x="450" y="228" class="s">greedy ordering · approach / grasp / retract poses</text>
+  <line x1="450" y1="240" x2="450" y2="275" class="l" marker-end="url(#a)"/>
+  <text x="462" y="263" class="m">/agrobot/pick_target (PoseArray)</text>
+
+  <!-- 3 commander -->
+  <rect x="250" y="275" width="400" height="80" rx="10" class="box"/>
+  <text x="450" y="305" class="h">robot_commander</text>
+  <text x="450" y="326" class="s">PickSequence action · pose / joint / position commands</text>
+  <text x="450" y="343" class="s">MoveIt 2 planning · TRAC-IK · Cartesian paths</text>
+  <line x1="450" y1="355" x2="450" y2="390" class="l" marker-end="url(#a)"/>
+  <text x="462" y="378" class="m">/arm_controller/follow_joint_trajectory</text>
+
+  <!-- 4 fanout -->
+  <rect x="250" y="390" width="400" height="70" rx="10" class="box"/>
+  <text x="450" y="420" class="h">epos2_fjt_fanout</text>
+  <text x="450" y="441" class="s">splits arm trajectory into per-joint goals, synced start</text>
+
+  <!-- fan lines -->
+  <path d="M450 460 V485 H150 V510" class="l" marker-end="url(#a)"/>
+  <path d="M450 460 V510" class="l" marker-end="url(#a)"/>
+  <path d="M450 460 V485 H750 V510" class="l" marker-end="url(#a)"/>
+
+  <!-- 5 bridges -->
+  <rect x="30" y="510" width="240" height="90" rx="10" class="ext"/>
+  <text x="150" y="540" class="h">J0 Linear Rail</text>
+  <text x="150" y="561" class="s">ingenia_bridge</text>
+  <text x="150" y="580" class="s">(separate workspace)</text>
+
+  <rect x="330" y="510" width="240" height="90" rx="10" class="ext"/>
+  <text x="450" y="540" class="h">J1 Shoulder Rotate</text>
+  <text x="450" y="561" class="s">copley_bridge</text>
+  <text x="450" y="580" class="s">(separate workspace)</text>
+
+  <rect x="630" y="510" width="240" height="90" rx="10" class="box"/>
+  <text x="750" y="540" class="h">J2–J6 Arm Joints</text>
+  <text x="750" y="561" class="s">epos2_bridge</text>
+  <text x="750" y="580" class="s">(this repo)</text>
+
+  <!-- converge -->
+  <path d="M150 600 V635 H450" class="l"/>
+  <path d="M750 600 V635 H450" class="l"/>
+  <line x1="450" y1="600" x2="450" y2="670" class="l" marker-end="url(#a)"/>
+  <text x="462" y="655" class="m">CANopen · Interpolated Position Mode</text>
+
+  <!-- 6 hardware -->
+  <rect x="250" y="670" width="400" height="90" rx="10" class="hw"/>
+  <text x="450" y="700" class="h">CAN Bus (1 Mbps) → Motor Drives</text>
+  <text x="450" y="722" class="s">Ingenia EVS-XCR-C · Copley APZ-090-50</text>
+  <text x="450" y="740" class="s">Maxon EPOS2 70/10 ×5</text>
+
+  <!-- legend -->
+  <rect x="30" y="700" width="16" height="16" rx="3" class="box"/>
+  <text x="54" y="713" class="s" style="text-anchor:start">This repo</text>
+  <rect x="30" y="724" width="16" height="16" rx="3" class="ext"/>
+  <text x="54" y="737" class="s" style="text-anchor:start">Separate repo / workspace</text>
+  <rect x="30" y="748" width="16" height="16" rx="3" class="hw"/>
+  <text x="54" y="761" class="s" style="text-anchor:start">Hardware</text>
+</svg>
