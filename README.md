@@ -4,6 +4,10 @@ Motion-planning and motor-control software for **Agrobot (AgroBot TOM v2)**, the
 
 This repo covers the motion-planning side only. The AI vision pipeline, web dashboard, and the Copley/Ingenia drive bridges live in separate workspaces (see [Related systems](#related-systems)).
 
+![RViz screen capture: the Agrobot arm and gripper on the linear rail moving through MoveIt-planned poses](docs/images/rviz-demo.gif)
+
+*The arm on its linear rail moving through MoveIt-planned poses in RViz.*
+
 ---
 
 ## Table of contents
