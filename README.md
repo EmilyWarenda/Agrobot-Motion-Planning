@@ -101,7 +101,7 @@ MoveIt 2 setup generated with the Setup Assistant and then customized:
 
 ### `epos2_bridge` and `epos2_bridge_interfaces`
 
-Translate ROS 2 trajectories into CANopen commands for the Maxon EPOS2 drives.
+Translate ROS 2 trajectories into CANopen commands for the Maxon EPOS2 drives. These bridges were developed by other members of the team, not by the motion-planning author; the motion-planning side consumes them through the MoveIt controller configuration.
 
 | Node | Role |
 |---|---|
@@ -201,7 +201,7 @@ Software work in this repo, grouped by area:
 - **Picker integration** — integrated the tomato-picking script with TF2 frame transforms, the safety gate, picked-ID tracking, and a placeholder camera transform.
 - **Robot model** — new rail zero point and limits, real gripper model with mimic joints, joint 6 changed from fixed to revolute, link 5→6 offset (+10 mm), world-frame orientation fix, new and renamed named poses.
 - **MoveIt** — KDL → TRAC-IK, kinematic-chain arm group, gripper groups, updated limits and controller configs, RViz interactive markers.
-- **Motors** — EPOS2 bridge integration with the MoveIt controller stack; an earlier standalone J0 bringup package was removed once the EPOS2 bridge covered the motors.
+- **Motors** — the EPOS2 bridge and motor drivers were written by other team members; the motion-planning work here wired them into the MoveIt controller configuration. An earlier standalone J0 bringup package was removed once the EPOS2 bridge covered the motors.
 
 ## 11. Notes
 
