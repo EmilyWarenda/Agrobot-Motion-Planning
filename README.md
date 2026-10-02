@@ -1,6 +1,8 @@
 # Agrobot — Motion Planning
 
-Motion-planning and motor-control software for **Agrobot (AgroBot TOM v2)**, the BU Robotics Club's autonomous tomato-picking robot, built for the MassRobotics Form & Function Challenge. The robot is a 7-joint arm on a motorized **linear rail** (the rail is joint 0). Vision detects tomatoes, and this repository turns those detections into planned, executed arm motions: **ROS 2 Jazzy + MoveIt 2**, with CANopen motor bridges for the hardware.
+Motion-planning and motor-control software for **Agrobot (AgroBot TOM v2)**, the BU Robotics Club's autonomous tomato-picking robot, built for the MassRobotics Form & Function Challenge in the Spring 2026 semester. The robot is a 7-joint arm on a motorized **linear rail** (the rail is joint 0). Vision detects tomatoes, and this repository turns those detections into planned, executed arm motions: **ROS 2 Jazzy + MoveIt 2**, with CANopen motor bridges for the hardware.
+
+**[▶ Watch the competition video](https://drive.google.com/file/d/175XPE-ufJtsahZAMrSigRacSJWQMvtdv/view?usp=sharing)** — Agrobot demo made for the MassRobotics Form & Function Challenge.
 
 This repo covers the motion-planning side only. The AI vision pipeline, web dashboard, and the Copley/Ingenia drive bridges live in separate workspaces (see [Related systems](#related-systems)).
 
@@ -10,9 +12,7 @@ This repo covers the motion-planning side only. The AI vision pipeline, web dash
 
 ![RViz screen capture: the Agrobot arm and gripper on the linear rail moving through MoveIt-planned poses](docs/images/rviz-demo.gif)
 
-*The same arm in simulation, moving through MoveIt-planned poses in RViz.*
-
-**[▶ Watch the competition video](https://drive.google.com/file/d/175XPE-ufJtsahZAMrSigRacSJWQMvtdv/view?usp=sharing)** — Agrobot demo made for the MassRobotics Form & Function Challenge.
+*The arm on its linear rail moving through the pick sequence on RViz.*
 
 ---
 
@@ -27,8 +27,7 @@ This repo covers the motion-planning side only. The AI vision pipeline, web dash
 7. [Commanding the arm](#7-commanding-the-arm)
 8. [Named poses](#8-named-poses)
 9. [Related systems](#9-related-systems)
-10. [Development history](#10-development-history)
-11. [Notes](#11-notes)
+10. [Notes](#10-notes)
 
 ---
 
@@ -203,17 +202,7 @@ Not part of this repository:
 - **Ingenia / Copley bridges** — drivers for J0 (rail) and J1, plus the trajectory fanout covering all joints.
 - **Web dashboard** — browser UI (rosbridge) for monitoring and control.
 
-## 10. Development history
-
-Software work in this repo, grouped by area:
-
-- **Interfaces & commander** — created `robot_interfaces`; built the commander node, `PickSequence` action server, topic namespace under `/agrobot`, and test programs.
-- **Picker integration** — integrated the tomato-picking script with TF2 frame transforms, the safety gate, picked-ID tracking, and a placeholder camera transform.
-- **Robot model** — new rail zero point and limits, real gripper model with mimic joints, joint 6 changed from fixed to revolute, link 5→6 offset (+10 mm), world-frame orientation fix, new and renamed named poses.
-- **MoveIt** — KDL → TRAC-IK, kinematic-chain arm group, gripper groups, updated limits and controller configs, RViz interactive markers.
-- **Motors** — the EPOS2 bridge and motor drivers were written by other team members; the motion-planning work here wired them into the MoveIt controller configuration. An earlier standalone J0 bringup package was removed once the EPOS2 bridge covered the motors.
-
-## 11. Notes
+## 10. Notes
 
 - Many `*.bak_*` files and `.bak_*` directories in `epos2_bridge`, `moveit_config`, and `scripts` are snapshots from hardware debugging; they are not part of the working code path.
 - `epos2_j3_bridge_WORKING.py` and `epos2_j3_bridge_clean.py` are reference variants kept for comparison.
