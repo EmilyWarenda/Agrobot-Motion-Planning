@@ -8,6 +8,8 @@ This repo covers the motion-planning side only. The AI vision pipeline, web dash
 
 *The arm on its linear rail moving through MoveIt-planned poses in RViz.*
 
+**[▶ Watch the competition video](https://drive.google.com/file/d/175XPE-ufJtsahZAMrSigRacSJWQMvtdv/view?usp=sharing)** — Agrobot demo made for the MassRobotics Form & Function Challenge.
+
 ---
 
 ## Table of contents
