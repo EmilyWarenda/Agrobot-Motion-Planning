@@ -8,7 +8,7 @@ This repo covers the motion-planning side only. The AI vision pipeline, web dash
 
 ![RViz screen capture: the Agrobot arm and gripper on the linear rail moving through MoveIt-planned poses](docs/images/rviz-demo.gif)
 
-*The arm on its linear rail moving through MoveIt-planned poses in RViz.*
+*The arm on its linear rail moving through the pick sequence on RViz.*
 
 ---
 
