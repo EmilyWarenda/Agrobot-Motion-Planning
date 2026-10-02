@@ -2,19 +2,19 @@
 
 Motion-planning and motor-control software for **Agrobot (AgroBot TOM v2)**, the BU Robotics Club's autonomous tomato-picking robot, built for the MassRobotics Form & Function Challenge in the Spring 2026 semester. The robot is a 7-joint arm on a motorized **linear rail** (the rail is joint 0). Vision detects tomatoes, and this repository turns those detections into planned, executed arm motions: **ROS 2 Jazzy + MoveIt 2**, with CANopen motor bridges for the hardware.
 
-**[▶ Watch the competition video](https://drive.google.com/file/d/175XPE-ufJtsahZAMrSigRacSJWQMvtdv/view?usp=sharing)** — Agrobot demo made for the MassRobotics Form & Function Challenge.
-
-This repo covers the motion-planning side only. The AI vision pipeline, web dashboard, and the Copley/Ingenia drive bridges live in separate workspaces (see [Related systems](#related-systems)).
-
 ![The Agrobot arm on its linear rail at the competition, with the orange and blue 3D-printed links and the two-fin gripper](docs/images/agrobot-robot.jpg)
 
-*Agrobot at the competition.*
+*Agrobot at the MassRobotics Expo in May 2026 for the MassRobotics Form & Function Challenge.*
+
+**[▶ Watch the competition video](https://drive.google.com/file/d/175XPE-ufJtsahZAMrSigRacSJWQMvtdv/view?usp=sharing)** — Agrobot demo made for the MassRobotics Form & Function Challenge.
+
+---
+
+This repo covers the motion-planning side only. The AI vision pipeline, web dashboard, and the Copley/Ingenia drive bridges live in separate workspaces (see [Related systems](#related-systems)).
 
 ![RViz screen capture: the Agrobot arm and gripper on the linear rail moving through MoveIt-planned poses](docs/images/rviz-demo.gif)
 
 *The arm on its linear rail moving through the pick sequence on RViz.*
-
----
 
 ## Table of contents
 
