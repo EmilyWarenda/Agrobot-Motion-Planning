@@ -24,30 +24,7 @@ This repo covers the motion-planning side only. The AI vision pipeline, web dash
 
 ## 1. System overview
 
-```
-AI vision (separate repo)
-    → /agrobot/tomato_spatial  (detections with 3D centroids)
-        │
-        ▼
-tomato_picker.py / sequencer.py        order tomatoes, build approach/grasp/retract poses
-    → /agrobot/pick_target  (PoseArray)
-        │
-        ▼
-robot_commander (commander.cpp)        PickSequence action server + command subscribers
-        │  plans with MoveIt 2 (TRAC-IK, kinematic chain base→tip)
-        ▼
-/arm_controller/follow_joint_trajectory
-        │
-        ▼
-epos2_fjt_fanout                       splits the arm trajectory into per-joint trajectories
-        │
-   ┌────┴──────────────┐
-   ▼                   ▼
-epos2_bridge        other joint bridges (J0 rail, J1)
-   │
-   ▼
-CANopen (Interpolated Position Mode) → CAN bus → motor drives
-```
+![Agrobot system flow: vision detections go through the tomato picker, robot commander and MoveIt, then the trajectory fanout to the joint bridges, CANopen and the motor drives](docs/images/system-flow.svg)
 
 A pick runs as: **approach → grasp → retract → drop in bin**, repeated for each tomato, with an optional confirmation step between tomatoes.
 
